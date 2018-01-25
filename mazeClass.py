@@ -21,12 +21,50 @@ class Maze:
 		self.rowsNum = rowsNum
 		self.colsNum = len(self.maze[0])
 		self.prizesNum = prizesNum
+		self.currentXcor = self.startRow
+		self.currentYcor = self.startCol
 	def getMaze(self):
 		return self.maze
 
-def main():
-	maze = Maze("1prize-open.txt")
-	maze.getMaze()
 
-main()
+
+	def move(self,direction):
+		xCor = self.currentXcor
+		yCor = self.currentYcor
+		currentPos = (xCor,yCor)
+		if direction == "up":
+			if self.maze[xCor - 1][yCor] == "%":
+				return ("Blocked")
+			else:
+				xCor = xCor - 1
+				currentPos = (xCor, yCor)
+		elif direction == "down":
+			if self.maze[xCor + 1][yCor] == "%":
+				return "Blocked"
+			else:
+				xCor = xCor + 1
+				currentPos = (xCor, yCor)
+		if direction == "left":
+			if self.maze[xCor][yCor - 1] == "%":
+				return ("Blocked")
+			else:
+				yCor = yCor - 1
+				currentPos = (xCor, yCor)
+		if direction == "right":
+			if self.maze[xCor][yCor + 1] == "%":
+				return Blocked
+			else:
+				yCor = yCor + 1
+				currentPos = (xCor, yCor)
+		self.currentXcor = xCor
+		self.currentYcor = yCor
+		return currentPos
+
+maze = Maze("1prize-open.txt")
+print(maze.move("right"))
+print(maze.currentXcor)
+print(maze.currentYcor)
+print(maze.move("left"))
+
+
 
