@@ -1,11 +1,11 @@
 class Maze:
 	def __init__(self,filename):
 		rowsNum = 0
-		colsNum = 0
 		self.maze = []
 		mazeFile = open(filename,'r')
 		for line in mazeFile:
 			rowList = []
+			colsNum = 0
 			for ch in line:
 				rowList.append(ch)
 				if ch == 'P':
@@ -16,7 +16,7 @@ class Maze:
 			self.maze.append(rowList)
 
 		self.rowsNum = rowsNum
-		self.colsNum = colsNum
+		self.colsNum = len(self.maze[0])
 	def getMaze(self):
 		return self.maze
 
