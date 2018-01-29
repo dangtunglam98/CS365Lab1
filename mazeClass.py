@@ -49,39 +49,6 @@ class Maze:
 				graph[(row,col+1)].append(("W",(row,col)))
 		return graph
 
-	def single_bfs(self):
-		start, goal = (self.startRow,self.startCol), self.prizesCor[0]
-		queue = deque([("", start)])
-		visited = set()
-		graph = self.maze2graph()
-		while queue:
-			path, current = queue.popleft()
-			if current == goal:
-				return path
-			if current in visited:
-				continue
-			visited.add(current)
-			for direction, neighbour in graph[current]:
-				queue.append((path  + direction, neighbour))
-		return False
-
-	def single_dfs(self):
-		start, goal = (self.startRow, self.startCol), self.prizesCor[0]
-		stack = deque([("", start)])
-		visited = set()
-		graph = self.maze2graph()
-		while stack:
-			path, current = stack.pop()
-			if current == goal:
-				return path
-			if current in visited:
-				continue
-			visited.add(current)
-			for direction, neighbour in graph[current]:
-				stack.append((path + direction, neighbour))
-
-			#print((currentRow,currentCol))
-
 	def move(self, direction):
 		xCor = self.currentXcor
 		yCor = self.currentYcor
@@ -126,11 +93,10 @@ class Maze:
 		for row in self.maze:
 			print(''.join(row))
 
-maze = Maze("1prize-open.txt")
-print(maze.maze2graph())
-print(maze.startRow)
-print(maze.startCol)
-print(maze.single_bfs())
-print(maze.single_dfs())
-maze.path(maze.single_bfs())
-maze.drawMaze()
+
+# maze = Maze("1prize-medium.txt")
+# maze.drawMaze()
+# print(maze.single_bfs())
+# print(maze.single_dfs())
+# maze.path(maze.single_bfs())
+# maze.drawMaze()
