@@ -18,6 +18,11 @@ def single_bfs(file):
             queue.append((path  + direction, neighbour))
     return False
 
+def single_bfs_path(file):
+    maze = Maze(file)
+    maze.path(single_bfs(file))
+    maze.drawMaze()
+
 def single_dfs(file):
     maze = Maze(file)
     start, goal = (maze.startRow,maze.startCol), maze.prizesCor[0]
@@ -35,4 +40,11 @@ def single_dfs(file):
             queue.append((path + direction, neighbour))
     return False
 
-print(single_dfs("1prize-open.txt"))
+def single_dfs_path(file):
+    maze = Maze(file)
+    maze.path(single_dfs(file))
+    maze.drawMaze()
+
+single_bfs_path("1prize-medium.txt")
+print("\n")
+single_dfs_path("1prize-medium.txt")
