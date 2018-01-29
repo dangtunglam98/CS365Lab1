@@ -1,3 +1,4 @@
+from collections import deque
 class Maze:
 	def __init__(self,filename):
 		rowsNum = 0
@@ -9,16 +10,17 @@ class Maze:
 			rowList = []
 			colsNum = 0
 			for ch in line:
-				if ch == 'P':
-					ch = ' '
-					self.startRow = rowsNum
-					self.startCol = colsNum
-				if ch == '.':
-					ch = ' '
-					prizesNum = prizesNum + 1
-					self.prizesCor.append((rowsNum,colsNum))
-				colsNum = colsNum + 1
-				rowList.append(ch)
+				if ch != '\n':
+					if ch == 'P':
+						ch = ' '
+						self.startRow = rowsNum
+						self.startCol = colsNum
+					if ch == '.':
+						ch = ' '
+						prizesNum = prizesNum + 1
+						self.prizesCor.append((rowsNum,colsNum))
+					colsNum = colsNum + 1
+					rowList.append(ch)
 			rowsNum = rowsNum + 1
 			self.maze.append(rowList)
 
@@ -47,7 +49,21 @@ class Maze:
 				graph[(row,col+1)].append(("W",(row,col)))
 		return graph
 
-
+	def single_dfs(self):
+		start, goal = (self.startRow,self.startCol), self.prizesCor[0]
+		queue = deque([("Start", start)])
+		visited = set()
+		graph = self.maze2graph()
+		while queue:
+			path, current = queue.popleft()
+			if current == goal:
+				return path
+			if current in visited:
+				continue
+			visited.add(current)
+			for direction, neighbour in graph[current]:
+				queue.append((path + "-" + direction, neighbour))
+		return False
 	# def move(self,direction):
 	# 	xCor = self.currentXcor
 	# 	yCor = self.currentYcor
@@ -81,8 +97,8 @@ class Maze:
 	# 	return currentPos
 
 maze = Maze("1prize-open.txt")
-print(maze.maze2graph())
+print(maze.getMaze())
 print(maze.startRow)
 print(maze.startCol)
-
+print(maze.single_dfs())
 
