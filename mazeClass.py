@@ -3,18 +3,22 @@ class Maze:
 		rowsNum = 0
 		prizesNum = 0
 		self.maze = []
+		self.prizesCor = []
 		mazeFile = open(filename,'r')
 		for line in mazeFile:
 			rowList = []
 			colsNum = 0
 			for ch in line:
-				rowList.append(ch)
 				if ch == 'P':
+					ch = ' '
 					self.startRow = rowsNum
 					self.startCol = colsNum
 				if ch == '.':
+					ch = ' '
 					prizesNum = prizesNum + 1
+					self.prizesCor.append((rowsNum,colsNum))
 				colsNum = colsNum + 1
+				rowList.append(ch)
 			rowsNum = rowsNum + 1
 			self.maze.append(rowList)
 
@@ -23,6 +27,7 @@ class Maze:
 		self.prizesNum = prizesNum
 		self.currentXcor = self.startRow
 		self.currentYcor = self.startCol
+
 	def getMaze(self):
 		return self.maze
 
