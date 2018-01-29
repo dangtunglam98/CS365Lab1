@@ -26,7 +26,15 @@ class Maze:
 	def getMaze(self):
 		return self.maze
 
-
+	def maze2graph(self):
+		#graph = {(i,j):[] for j in range (self.colsNum) for i in range (self.rowsNum) if not self.maze[i-1][j-1]}
+		graph = {}
+		for j in range(self.colsNum-1):
+			for i in range(self.rowsNum-1):
+				if self.maze[i][j] != "%":
+					graph.update({(i,j):[]})
+		
+		return graph
 
 	def move(self,direction):
 		xCor = self.currentXcor
@@ -52,7 +60,7 @@ class Maze:
 				currentPos = (xCor, yCor)
 		if direction == "right":
 			if self.maze[xCor][yCor + 1] == "%":
-				return Blocked
+				return ("Blocked")
 			else:
 				yCor = yCor + 1
 				currentPos = (xCor, yCor)
@@ -61,10 +69,7 @@ class Maze:
 		return currentPos
 
 maze = Maze("1prize-open.txt")
-print(maze.move("right"))
-print(maze.currentXcor)
-print(maze.currentYcor)
-print(maze.move("left"))
+print(maze.maze2graph())
 
 
 
