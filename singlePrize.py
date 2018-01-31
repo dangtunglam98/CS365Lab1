@@ -47,7 +47,7 @@ def single_dfs_path(file):
     maze.drawMaze()
 
 def heuristic(current,goal): #Manhattan
-    return abs(current[0] - goal[0]) + abs(current[1] - goal[1] )
+    return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
 def single_astar(file):
     maze = Maze(file)
@@ -92,9 +92,7 @@ def single_astar_path(file):
     maze.path(single_astar(file))
     maze.drawMaze()
 
-def single_astar(file):
-    maze = Maze(file)
-    start, goal = (maze.startRow, maze.startCol), maze.prizesCor[0]
+def mincost_single_astar(start,goal,maze):
     cost = 0
     pr_queue = []
     heappush(pr_queue,(cost + heuristic(start,goal),cost, "", start))
@@ -103,7 +101,7 @@ def single_astar(file):
     while pr_queue:
         _, cost, path, current = heappop(pr_queue)
         if current == goal:
-            return path
+            return cost
         if current in visited:
             continue
         visited.add(current)
@@ -116,48 +114,49 @@ def single_gbfs_path(file):
     maze.path(single_gbfs(file))
     maze.drawMaze()
 
-# def nearest_neighbour(points):
-#     current = (maze.startRow,maze.startCol)
-#     nn_points = []
-#     while len(points) > 0:
-#         next = points[0]
-#         for point in points:
-#             if heuristic(current, point) < heuristic(current,next):
-#                 next = point
-#         nn_points.append(next)
-#         points.remove(next)
-#         current = next
-#     return nn_points
+def nearest_neighbour(maze):
+    current = (maze.startRow,maze.startCol)
+    points = maze.prizesCor
+    nn_points = []
+    while len(points) > 0:
+        next = points[0]
+        for point in points:
+            if mincost_single_astar(current,point,maze) < mincost_single_astar(current,next,maze):
+                next = point
+        nn_points.append(next)
+        points.remove(next)
+        current = next
+    return nn_points
 
-# def multi_astar(file):
-#     maze = Maze(file)
-#     current = (maze.startRow,maze.startCol)
-#     goal = nearest_neighbour(maze.prizesCor)
-#     cost = 0
-#     pr_queue = []
-#     visited = set()
-#     graph = maze.maze2graph()
-#     index = 0
-#     subgoal = goal[index]
-#     heappush(pr_queue, (cost + heuristic(current, subgoal), cost, "", current))
-#     while pr_queue:
-#         _, cost, path, current = heappop(pr_queue)
-#         if current == subgoal:
-#             if index == (len(goal) - 1):
-#                 return path
-#             else:
-#                 index = index + 1
-#
-#     #         else:
-#     #             goal.remove(subgoal)
-#     #             index = index + 1
-#     #
-#         if current in visited:
-#             continue
-#         visited.add(current)
-#         for direction, neighbour in graph[current]:
-#             heappush(pr_queue, (cost + heuristic(neighbour, subgoal), cost + 1, path + direction, neighbour))
-#     # return False
+def multi_astar(file):
+    maze = Maze(file)
+    current = (maze.startRow,maze.startCol)
+    goal = nearest_neighbour(maze.prizesCor)
+    cost = 0
+    pr_queue = []
+    visited = set()
+    graph = maze.maze2graph()
+    index = 0
+    subgoal = goal[index]
+    heappush(pr_queue, (cost + heuristic(current, subgoal), cost, "", current))
+    while pr_queue:
+        _, cost, path, current = heappop(pr_queue)
+        if current == subgoal:
+            if index == (len(goal) - 1):
+                return path
+            else:
+                index = index + 1
+
+    #         else:
+    #             goal.remove(subgoal)
+    #             index = index + 1
+    #
+        if current in visited:
+            continue
+        visited.add(current)
+        for direction, neighbour in graph[current]:
+            heappush(pr_queue, (cost + heuristic(neighbour, subgoal), cost + 1, path + direction, neighbour))
+    # return False
 
 def multi_astar_util(start,subgoal):
     cost = 0
@@ -178,7 +177,7 @@ def multi_astar_util(start,subgoal):
 
 def multi_astar(file):
     maze = Maze(file)
-    goals = nearest_neighbour(maze.prizesCor)
+    goals = nearest_neighbour(maze)
     path = ""
     current = (maze.startRow,maze.startCol)
     for subgoal in goals:
@@ -191,11 +190,13 @@ def multi_astar_path(file):
     maze.path(multi_astar(file))
     maze.drawMaze()
 
-maze = Maze("multiprize-tiny.txt")
+maze = Maze("multiprize-medium.txt")
+print(maze.prizesNum)
+print(nearest_neighbour(maze))
 print(maze.prizesCor)
-print(nearest_neighbour(maze.prizesCor))
-print(multi_astar("multiprize-tiny.txt"))
-print(multi_astar_path("multiprize-tiny.txt"))
+
+print(multi_astar("multiprize-medium.txt"))
+#print(multi_astar_path("multiprize-tiny.txt"))
 #print(single_bfs_path("1prize-medium.txt"))
 # multi_astar_path("multiprize-tiny.txt")
 #single_bfs_path("1prize-large.txt")
