@@ -34,6 +34,7 @@ class Maze:
 		return self.maze
 
 	def maze2graph(self):
+		"""Return a Graph based on the given maze"""
 		graph = {}
 		for j in range(self.colsNum-1):
 			for i in range(self.rowsNum-1):
@@ -49,6 +50,7 @@ class Maze:
 		return graph
 
 	def move(self, direction):
+		"""Move Agent in the Maze"""
 		xCor = self.currentXcor
 		yCor = self.currentYcor
 		currentPos = (xCor, yCor)
