@@ -57,30 +57,30 @@ class Maze:
 			if self.maze[xCor - 1][yCor] == "%":
 				return ("Blocked")
 			else:
-				self.maze[xCor][yCor] = '#'
 				xCor = xCor - 1
 				currentPos = (xCor, yCor)
+				self.maze[xCor][yCor] = '#'
 		elif direction == "S":
 			if self.maze[xCor + 1][yCor] == "%":
 				return currentPos
 			else:
-				self.maze[xCor][yCor] = '#'
 				xCor = xCor + 1
 				currentPos = (xCor, yCor)
+				self.maze[xCor][yCor] = '#'
 		if direction == "W":
 			if self.maze[xCor][yCor - 1] == "%":
 				return currentPos
 			else:
-				self.maze[xCor][yCor] = '#'
 				yCor = yCor - 1
 				currentPos = (xCor, yCor)
+				self.maze[xCor][yCor] = '#'
 		if direction == "E":
 			if self.maze[xCor][yCor + 1] == "%":
 				return currentPos
 			else:
-				self.maze[xCor][yCor] = '#'
 				yCor = yCor + 1
 				currentPos = (xCor, yCor)
+				self.maze[xCor][yCor] = '#'
 		self.currentXcor = xCor
 		self.currentYcor = yCor
 		return currentPos
@@ -93,10 +93,3 @@ class Maze:
 		for row in self.maze:
 			print(''.join(row))
 
-
-# maze = Maze("1prize-medium.txt")
-# maze.drawMaze()
-# print(maze.single_bfs())
-# print(maze.single_dfs())
-# maze.path(maze.single_bfs())
-# maze.drawMaze()
