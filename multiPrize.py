@@ -57,19 +57,28 @@ def multi_astar_single(start,subgoal,maze):
 def multi_astar_util(maze):
     goals = nearest_neighbour(maze)
     path = ""
+    order = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
     current = (maze.startRow,maze.startCol)
     Expandednodes = 0
     for subgoal in goals:
         onepath , current_in_util, nodeEx = multi_astar_single(current,subgoal,maze)
         path = path  +onepath
         current = current_in_util
+        (x,y) = current_in_util
+        maze.maze[x][y] = order.pop(0)
         Expandednodes = Expandednodes + nodeEx
     return path , Expandednodes
 
 def multi_astar(file):
     maze = Maze(file)
-    path, nodeExpanded = multi_astar_util(maze)
-    maze.path(path)
-    maze.drawMaze()
-    print("The cost is " + str(len(path)))
-    print("Number of Node Expanded is " + str(nodeExpanded))
+    path, ExpNode = multi_astar_util(maze)
+
+    output = open("multi_astar_output.txt","a")
+    output.write("----------------------------------------------------------------------------------------\n")
+    output.write("Multi ASTAR for " + file + "\n")
+    for row in maze.maze:
+        output.write(''.join(row))
+        output.write("\n")
+    output.write("The cost is " + str(len(path)) + "\n")
+    output.write("Number of Nodes Expanded is " + str(ExpNode) + "\n")
+    output.write("\n")

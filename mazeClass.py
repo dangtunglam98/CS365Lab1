@@ -1,4 +1,4 @@
-from collections import deque
+
 class Maze:
 	def __init__(self,filename):
 		rowsNum = 0
@@ -12,7 +12,7 @@ class Maze:
 			for ch in line:
 				if ch != '\n':
 					if ch == 'P':
-						ch = ' '
+						#ch = ' '
 						self.startRow = rowsNum
 						self.startCol = colsNum
 					if ch == '.':
@@ -34,7 +34,6 @@ class Maze:
 		return self.maze
 
 	def maze2graph(self):
-		#graph = {(i,j):[] for j in range (self.colsNum) for i in range (self.rowsNum) if not self.maze[i-1][j-1]}
 		graph = {}
 		for j in range(self.colsNum-1):
 			for i in range(self.rowsNum-1):

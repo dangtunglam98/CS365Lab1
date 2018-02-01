@@ -24,9 +24,16 @@ def single_bfs(file):
     maze = Maze(file)
     path , ExpNode = single_bfs_util(maze)
     maze.path(path)
-    maze.drawMaze()
-    print("The cost is " + str(len(path)))
-    print("Number of Node Expanded is " + str(ExpNode))
+
+    output = open("single_bfs_output.txt","a")
+    output.write("----------------------------------------------------------------------------------------\n")
+    output.write("Single BFS for " + file + "\n")
+    for row in maze.maze:
+        output.write(''.join(row))
+        output.write("\n")
+    output.write("The cost is " + str(len(path)) + "\n")
+    output.write("Number of Nodes Expanded is " + str(ExpNode) + "\n")
+    output.write("\n")
 
 def single_dfs_util(maze):
     start, goal = (maze.startRow,maze.startCol), maze.prizesCor[0]
@@ -48,11 +55,18 @@ def single_dfs_util(maze):
 
 def single_dfs(file):
     maze = Maze(file)
-    path, nodeExpanded = single_dfs_util(maze)
+    path, ExpNode = single_dfs_util(maze)
     maze.path(path)
-    maze.drawMaze()
-    print("The cost is " + str(len(path)))
-    print("Number of Node Expanded is " + str(nodeExpanded))
+
+    output = open("single_dfs_output.txt","a")
+    output.write("----------------------------------------------------------------------------------------\n")
+    output.write("Single DFS for " + file + "\n")
+    for row in maze.maze:
+        output.write(''.join(row))
+        output.write("\n")
+    output.write("The cost is " + str(len(path)) + "\n")
+    output.write("Number of Nodes Expanded is " + str(ExpNode) + "\n")
+    output.write("\n")
 
 def heuristic(current,goal): #Manhattan
     return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
@@ -79,11 +93,18 @@ def single_gbfs_util(maze):
 
 def single_gbfs(file):
     maze = Maze(file)
-    path, nodeExpanded = single_gbfs_util(file)
+    path, ExpNode = single_gbfs_util(maze)
     maze.path(path)
-    maze.drawMaze()
-    print("The cost is " + str(len(path)))
-    print("Number of Node Expanded is " + str(nodeExpanded))
+
+    output = open("single_gbfs_output.txt","a")
+    output.write("----------------------------------------------------------------------------------------\n")
+    output.write("Single GBFS for " + file + "\n")
+    for row in maze.maze:
+        output.write(''.join(row))
+        output.write("\n")
+    output.write("The cost is " + str(len(path)) + "\n")
+    output.write("Number of Nodes Expanded is " + str(ExpNode) + "\n")
+    output.write("\n")
 
 def single_astar_util(maze):
     start, goal = (maze.startRow, maze.startCol), maze.prizesCor[0]
@@ -107,8 +128,15 @@ def single_astar_util(maze):
 
 def single_astar(file):
     maze = Maze(file)
-    path, nodeExpanded = single_astar_util(maze)
+    path, ExpNode = single_astar_util(maze)
     maze.path(path)
-    maze.drawMaze()
-    print("The cost is " + str(len(path)))
-    print("Number of Node Expanded is " + str(nodeExpanded))
+
+    output = open("single_astar_output.txt","a")
+    output.write("----------------------------------------------------------------------------------------\n")
+    output.write("Single ASTAR for " + file + "\n")
+    for row in maze.maze:
+        output.write(''.join(row))
+        output.write("\n")
+    output.write("The cost is " + str(len(path)) + "\n")
+    output.write("Number of Nodes Expanded is " + str(ExpNode) + "\n")
+    output.write("\n")
