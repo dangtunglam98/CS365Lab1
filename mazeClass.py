@@ -16,7 +16,7 @@ class Maze:
 						self.startRow = rowsNum
 						self.startCol = colsNum
 					if ch == '.':
-						ch = ' '
+						#ch = ' '
 						prizesNum = prizesNum + 1
 						self.prizesCor.append((rowsNum,colsNum))
 					colsNum = colsNum + 1
@@ -31,10 +31,11 @@ class Maze:
 		self.currentYcor = self.startCol
 
 	def getMaze(self):
+		""" Return the maze as grid """
 		return self.maze
 
 	def maze2graph(self):
-		"""Return a Graph based on the given maze"""
+		""" Return a Graph based on the given maze """
 		graph = {}
 		for j in range(self.colsNum-1):
 			for i in range(self.rowsNum-1):
@@ -50,7 +51,7 @@ class Maze:
 		return graph
 
 	def move(self, direction):
-		"""Move Agent in the Maze"""
+		""" Move Agent in the Maze and drop # of the way """
 		xCor = self.currentXcor
 		yCor = self.currentYcor
 		currentPos = (xCor, yCor)
@@ -87,10 +88,25 @@ class Maze:
 		return currentPos
 
 	def path(self, str):
+		""" Move the agent by the input path """
 		for ch in str:
 			self.move(ch)
 
+	def prizesCount(self):
+		""" Count the number of prizes left in the maze """
+		prizesNum = 0
+		for row in self.maze:
+			for elem in row:
+				if elem == '.':
+					prizesNum = prizesNum + 1
+		self.prizesNum = prizesNum
+
+	def goalTest(self):
+		""" Check if all the prizes have been collected or not """
+		return (self.prizesNum == 0)
+
 	def drawMaze(self):
+		""" Print the maze """
 		for row in self.maze:
 			print(''.join(row))
 

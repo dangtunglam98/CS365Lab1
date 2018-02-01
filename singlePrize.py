@@ -3,7 +3,7 @@ from collections import deque
 from heapq import heappop, heappush
 
 def single_bfs_util(maze):
-    """Return the Breadth-First Search path to get from start to prize"""
+    """ Return the Breadth-First Search path to get from start to prize """
     start, goal = (maze.startRow,maze.startCol), maze.prizesCor[0]
     queue = deque([("", start)])
     visited = set()
@@ -37,7 +37,7 @@ def single_bfs(file):
     output.write("\n")
 
 def single_dfs_util(maze):
-    """Return the Depth-First Search path to get from start to prize"""
+    """ Return the Depth-First Search path to get from start to prize """
     start, goal = (maze.startRow,maze.startCol), maze.prizesCor[0]
     queue = deque([("", start)])
     visited = set()
@@ -74,7 +74,7 @@ def heuristic(current,goal): #Manhattan
     return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
 def single_gbfs_util(maze):
-    """Return the Greedy Best-First Search path to get from start to prize"""
+    """ Return the Greedy Best-First Search path to get from start to prize """
     start, goal = (maze.startRow, maze.startCol), maze.prizesCor[0]
     cost = 0
     pr_queue = []
@@ -110,7 +110,7 @@ def single_gbfs(file):
     output.write("\n")
 
 def single_astar_util(maze):
-    """Return the A* Search path to get from start to prize"""
+    """ Return the A* Search path to get from start to prize """
     start, goal = (maze.startRow, maze.startCol), maze.prizesCor[0]
     cost = 0
     pr_queue = []

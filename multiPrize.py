@@ -5,7 +5,7 @@ def heuristic(current,goal): #Manhattan Distance
     return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
 def mincost_multi_heuristic(start,goal,maze):
-    """Return the cost between two points"""
+    """ Return the cost between two points """
     cost = 0
     pr_queue = []
     heappush(pr_queue,(cost + heuristic(start,goal),cost, "", start))
@@ -23,7 +23,7 @@ def mincost_multi_heuristic(start,goal,maze):
     return False
 
 def nearest_neighbour(maze):
-    '''Return the order of prizes based on minimum cost'''
+    """ Return the order of prizes based on minimum cost """
     current = (maze.startRow,maze.startCol)
     points = maze.prizesCor
     nn_points = []
@@ -38,7 +38,7 @@ def nearest_neighbour(maze):
     return nn_points
 
 def multi_astar_single(start,subgoal,maze):
-    '''Find the least-cost path to get from one subprize to another'''
+    """ Find the least-cost path to get from one subprize to another """
     cost = 0
     pr_queue = []
     heappush(pr_queue, (cost + heuristic(start, subgoal), cost, "", start))
@@ -58,7 +58,7 @@ def multi_astar_single(start,subgoal,maze):
     return False
 
 def multi_astar_util(maze):
-    '''Return the least-cost path to get all the prizes using the Minimum-Cost Path'''
+    """ Return the least-cost path to get all the prizes using the Minimum-Cost Path """
     goals = nearest_neighbour(maze)
     path = ""
     order = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
@@ -74,7 +74,7 @@ def multi_astar_util(maze):
     return path , Expandednodes
 
 def multi_astar(file):
-    """Return an output file for the function"""
+    """ Return an output file for the function """
     maze = Maze(file)
     path, ExpNode = multi_astar_util(maze)
 
