@@ -70,34 +70,3 @@ def multi_astar_util(file):
 def multi_astar(file):
     maze.path(multi_astar_util(file))
     maze.drawMaze()
-
-
-# def multi_astar(file):
-#     maze = Maze(file)
-#     current = (maze.startRow,maze.startCol)
-#     goal = nearest_neighbour(maze.prizesCor)
-#     cost = 0
-#     pr_queue = []
-#     visited = set()
-#     graph = maze.maze2graph()
-#     index = 0
-#     subgoal = goal[index]
-#     heappush(pr_queue, (cost + heuristic(current, subgoal), cost, "", current))
-#     while pr_queue:
-#         _, cost, path, current = heappop(pr_queue)
-#         if current == subgoal:
-#             if index == (len(goal) - 1):
-#                 return path
-#             else:
-#                 index = index + 1
-#
-#     #         else:
-#     #             goal.remove(subgoal)
-#     #             index = index + 1
-#     #
-#         if current in visited:
-#             continue
-#         visited.add(current)
-#         for direction, neighbour in graph[current]:
-#             heappush(pr_queue, (cost + heuristic(neighbour, subgoal), cost + 1, path + direction, neighbour))
-# return False

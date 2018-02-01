@@ -112,20 +112,3 @@ def single_astar(file):
     maze.drawMaze()
     print("The cost is " + str(len(path)))
     print("Number of Node Expanded is " + str(nodeExpanded))
-
-
-#maze = Maze("multiprize-small.txt")
-# print(maze.prizesNum)
-# print(nearest_neighbour(maze))
-# print(maze.prizesCor)
-#
-#print(multi_astar("multiprize-small.txt"))
-
-#print(multi_astar_path("multiprize-tiny.txt"))
-print(single_bfs("1prize-open.txt"))
-# multi_astar_path("multiprize-tiny.txt")
-# single_bfs_path("1prize-open.txt")
-# single_dfs_path("1prize-open.txt")
-# single_astar_path("1prize-open.txt")
-# single_gbfs_path("1prize-open.txt")
-# multiple_astar("multiprize-tiny.txt")
