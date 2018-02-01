@@ -9,7 +9,8 @@ def main():
     print("3. 1prize-large.txt")
     print("4. multiprize-tiny.txt")
     print("5. multiprize-small.txt")
-    print("6. multiprize-medium.txt\n")
+    print("6. multiprize-medium.txt")
+    print("7. all files and all algorithms\n")
     firstinput = input("Enter the number to select a file: ")
 
     if firstinput == "1":
@@ -73,6 +74,26 @@ def main():
         multi_astar("multiprize-small.txt")
 
     elif firstinput == "6":
+        multi_astar("multiprize-medium.txt")
+
+    elif firstinput == "7":
+        single_bfs("1prize-open.txt")
+        single_dfs("1prize-open.txt")
+        single_gbfs("1prize-open.txt")
+        single_astar("1prize-open.txt")
+
+        single_bfs("1prize-medium.txt")
+        single_dfs("1prize-medium.txt")
+        single_gbfs("1prize-medium.txt")
+        single_astar("1prize-medium.txt")
+
+        single_bfs("1prize-large.txt")
+        single_dfs("1prize-large.txt")
+        single_gbfs("1prize-large.txt")
+        single_astar("1prize-large.txt")
+
+        multi_astar("multiprize-tiny.txt")
+        multi_astar("multiprize-small.txt")
         multi_astar("multiprize-medium.txt")
 
     else:
