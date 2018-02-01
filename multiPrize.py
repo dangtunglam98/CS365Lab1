@@ -35,7 +35,7 @@ def nearest_neighbour(maze):
         current = next
     return nn_points
 
-def multi_astar_single(start,subgoal):
+def multi_astar_single(start,subgoal,maze):
     cost = 0
     pr_queue = []
     heappush(pr_queue, (cost + heuristic(start, subgoal), cost, "", start))
@@ -54,19 +54,22 @@ def multi_astar_single(start,subgoal):
             heappush(pr_queue, (cost + heuristic(neighbour, subgoal), cost + 1, path + direction, neighbour))
     return False
 
-def multi_astar_util(file):
-    maze = Maze(file)
+def multi_astar_util(maze):
     goals = nearest_neighbour(maze)
     path = ""
     current = (maze.startRow,maze.startCol)
     Expandednodes = 0
     for subgoal in goals:
-        onepath , current_in_util, nodeEx = multi_astar_single(current,subgoal)
+        onepath , current_in_util, nodeEx = multi_astar_single(current,subgoal,maze)
         path = path  +onepath
         current = current_in_util
         Expandednodes = Expandednodes + nodeEx
     return path , Expandednodes
 
 def multi_astar(file):
-    maze.path(multi_astar_util(file))
+    maze = Maze(file)
+    path, nodeExpanded = multi_astar_util(maze)
+    maze.path(path)
     maze.drawMaze()
+    print("The cost is " + str(len(path)))
+    print("Number of Node Expanded is " + str(nodeExpanded))
