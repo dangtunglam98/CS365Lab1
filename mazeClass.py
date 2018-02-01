@@ -1,3 +1,6 @@
+# Anh Dang and Lam Dang
+# CS365 Lab A
+
 
 class Maze:
 	def __init__(self,filename):

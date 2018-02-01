@@ -1,3 +1,7 @@
+# Anh Dang and Lam Dang
+# CS365 Lab A
+
+
 from mazeClass import Maze
 from collections import deque
 from heapq import heappop, heappush

@@ -1,3 +1,7 @@
+# Anh Dang and Lam Dang
+# CS365 Lab A
+
+
 from singlePrize import single_bfs, single_dfs, single_gbfs, single_astar
 from multiPrize import multi_astar
 
