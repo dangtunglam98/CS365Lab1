@@ -15,11 +15,9 @@ class Maze:
 			for ch in line:
 				if ch != '\n':
 					if ch == 'P':
-						#ch = ' '
 						self.startRow = rowsNum
 						self.startCol = colsNum
 					if ch == '.':
-						#ch = ' '
 						prizesNum = prizesNum + 1
 						self.prizesCor.append((rowsNum,colsNum))
 					colsNum = colsNum + 1
